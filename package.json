@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "build:test": "tsc -b && vite build --mode testing",
     "preview": "vite preview",
-    "clear:all": "rimraf node_modules pnpm-lock.yaml",
+    "clear:all": "node scripts/clear.js",
     "prepare": "husky install",
     "commit": "git-cz",
     "lint": "npm run lint-eslint && npm run lint-stylelint",
