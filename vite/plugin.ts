@@ -1,5 +1,4 @@
-import type { PluginOption } from 'vite'
-import { loadEnv } from 'vite'
+import {loadEnv,type PluginOption} from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { envParse, parseLoadedEnv } from 'vite-plugin-env-parse'
@@ -9,6 +8,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import type { ImportMetaEnv } from '../src/types/env'
 import { vitePathAliases } from './vitePathAliases'
 import path from 'path'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 
 const createVitePlugin = (mode: string, isBuild = false) => {
   const viteEnv = parseLoadedEnv(loadEnv(mode, process.cwd())) as ImportMetaEnv
@@ -18,6 +18,10 @@ const createVitePlugin = (mode: string, isBuild = false) => {
     tailwindcss(),
     vitePathAliases({
       createGlobalAlias: true,
+    }),
+    tanstackRouter({
+      target: 'react',
+      autoCodeSplitting: true,
     }),
     // 自动生成 别名
 
